@@ -5,6 +5,7 @@ jenkins:
       grantedPermissions:
         - "Overall/Read:anonymous"
         - "Overall/Administer:authenticated"
+        - "Overall/Administer:jenkins"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
