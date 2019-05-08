@@ -118,25 +118,4 @@ tool:
     installations:
       - name: git
         home: /usr/local/bin/git
-jobs:
-  - script: >
-      job("terraform-job") {
-        description()
-        keepDependencies(false)
-        disabled(false)
-        concurrentBuild(false)
-        wrappers {
-           terraformBuildWrapper {
-              variables("") 
-              terraformInstallation("terraform")
-              doGetUpdate(true)
-              doNotApply(false)
-              doDestroy(false)
-              config {
-                 value("inline")
-                 inlineConfig("")
-                 fileConfig("")
-              }
-           }
-        }
-      }
+
