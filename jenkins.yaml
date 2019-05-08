@@ -113,3 +113,8 @@ unclassified:
             scm:
               git:
                 remote: "https://github.com/jenkins-infra/pipeline-library.git"
+tool:
+  git:
+    installations:
+      - name: git
+        home: /usr/local/bin/git
