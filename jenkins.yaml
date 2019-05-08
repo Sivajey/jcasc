@@ -84,6 +84,9 @@ credentials:
               id: user1
               username: test
               password: secretPassword
+              id: user2
+              username: jenkins
+              password: secretPassword
           - basicSSHUserPrivateKey:
               scope: SYSTEM
               id: agent-private-key-test
