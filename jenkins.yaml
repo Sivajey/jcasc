@@ -12,7 +12,7 @@ jenkins:
     globalMatrix:
       grantedPermissions:
         - "Overall/Read:jenkins"
-        - "Overall/Create:jenkins"    
+        - "Overall/View:jenkins"    
         - "Overall/Administer:authenticated"
   agentProtocols:
   - "JNLP4-connect"
