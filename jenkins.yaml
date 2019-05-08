@@ -3,9 +3,8 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
-        - "Overall/Read:anonymous"
         - "Overall/Administer:authenticated"
-        - "Overall/Administer:jenkins"
+        - "Overall/Read:jenkins"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
@@ -75,7 +74,7 @@ credentials:
           - usernamePassword:
               scope: SYSTEM
               id: user1
-              username: Administrator
+              username: test
               password: secretPassword
           - basicSSHUserPrivateKey:
               scope: SYSTEM
