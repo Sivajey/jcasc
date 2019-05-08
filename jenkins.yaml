@@ -84,6 +84,8 @@ credentials:
               id: user1
               username: test
               password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
               id: user2
               username: jenkins
               password: secretPassword
