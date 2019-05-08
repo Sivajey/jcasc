@@ -1,5 +1,10 @@
 jenkins:
-  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code Plugin 'JcasC' with web-hook  \n\n"
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code Plugin 'JcasC' \n\n"
+  authorizationStrategy:
+    globalMatrix:
+      grantedPermissions:
+        - "Overall/Read:anonymous"
+        - "Overall/Administer:authenticated"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
