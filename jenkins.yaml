@@ -4,7 +4,7 @@ jenkins:
     globalMatrix:
       grantedPermissions:
         - "Overall/Administer:authenticated"
-        - "Overall/Read:jenkins"
+        - "Overall/Read:test"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
