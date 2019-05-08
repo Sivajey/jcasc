@@ -6,10 +6,12 @@ jenkins:
       users:
         - id: test
           password: test
+        - id: jenkins
+          password: test
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
-        - "Overall/Read:anonymous"
+        - "Overall/Read:jenkins"
         - "Overall/Administer:authenticated"
   agentProtocols:
   - "JNLP4-connect"
