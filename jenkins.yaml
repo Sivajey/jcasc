@@ -1,12 +1,6 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code Plugin 'JcasC' \n\n"
   securityRealm:
-    github:
-      githubWebUri: "https://github.com"
-      githubApiUri: "https://api.github.com"
-      clientID: "someId"
-      clientSecret: "${GITHUB_SECRET}"
-      oauthScopes: "read:org,user:email"
     local:
       allowsSignup: false
       users:
