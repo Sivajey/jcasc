@@ -11,8 +11,8 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
-        - "Overall/Read:jenkins"
-        - "Overall/View:jenkins"    
+        - "View/Read:jenkins"
+        - "View/Create:jenkins"    
         - "Overall/Administer:authenticated"
   agentProtocols:
   - "JNLP4-connect"
