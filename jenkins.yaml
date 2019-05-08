@@ -8,10 +8,13 @@ jenkins:
           password: test
         - id: jenkins
           password: test
+        - id: max
+          password: test
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
         - "View/Read:jenkins"
+        - "View/Read:max"
         - "View/Create:jenkins"    
         - "Overall/Administer:authenticated"
   agentProtocols:
@@ -86,6 +89,11 @@ credentials:
               scope: SYSTEM
               id: user2
               username: jenkins
+              password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
+              id: user3
+              username: max
               password: secretPassword
           - basicSSHUserPrivateKey:
               scope: SYSTEM
