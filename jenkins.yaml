@@ -62,5 +62,21 @@ jenkins:
           \    - /busybox/cat\n    tty: true\n    volumeMounts:\n      - name: docker-config\n\
           \        mountPath: /kaniko/.docker/\n  volumes:\n    - name: docker-config\n\
           \      configMap:\n        name: docker-config"
-  
-  
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: SYSTEM
+              id: user1
+              username: Administrator
+              password: secretPassword
+          - basicSSHUserPrivateKey:
+              scope: SYSTEM
+              id: agent-private-key
+              username: agentuser
+              passphrase: password
+              description: "ssh private key used to connect ssh slaves"
+              privateKeySource:
+                directEntry:
+                  privateKey: sp0ds9d+skkfjf
