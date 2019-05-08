@@ -16,7 +16,7 @@ jenkins:
         - "View/Read:jenkins"
         - "View/Read:max"
         - "View/Create:jenkins"    
-        - "Overall/Administer:authenticated"
+        - "Overall/Administer:test"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
