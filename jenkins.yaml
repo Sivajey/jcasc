@@ -1,10 +1,16 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code Plugin 'JcasC' \n\n"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: test
+          password: test
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
+        - "Overall/Read:anonymous"
         - "Overall/Administer:authenticated"
-        - "Overall/Read:test"
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
