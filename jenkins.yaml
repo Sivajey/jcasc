@@ -73,7 +73,7 @@ credentials:
               password: secretPassword
           - basicSSHUserPrivateKey:
               scope: SYSTEM
-              id: agent-private-key
+              id: agent-private-key-test
               username: agentuser
               passphrase: password
               description: "ssh private key used to connect ssh slaves"
