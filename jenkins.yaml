@@ -1,0 +1,145 @@
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: test
+          password: test
+        - id: jenkins
+          password: test
+        - id: max
+          password: test
+        - id: bob
+          password: test
+  authorizationStrategy:
+    globalMatrix:
+      grantedPermissions:
+        - "View/Read:jenkins"
+        - "View/Read:max"
+        - "View/Create:jenkins" 
+        - "View/Create:bob"
+        - "Overall/Administer:test"
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  clouds:
+  - kubernetes:
+      containerCapStr: "10"
+      jenkinsTunnel: "jenkins-agent:50000"
+      jenkinsUrl: "http://jenkins:8080"
+      maxRequestsPerHostStr: "32"
+      name: "kubernetes"
+      namespace: "default"
+      serverUrl: "https://kubernetes.default"
+      templates:
+      - name: "jnlp"
+        label: "jnlp"
+        yaml: |
+         apiVersion: v1
+         kind: Pod
+         metadata:
+           labels:
+             app: jnlp-0
+           name: jnlp
+         spec:
+           containers:
+           - name: jnlp
+             image: jenkinsci/jnlp-slave:3.27-1-alpine
+             imagePullPolicy: IfNotPresent
+             resources:
+               requests:
+                 memory: "256Mi"
+                 cpu: "0.3"
+               limits:
+                 memory: "512Mi"
+                 cpu: "0.5"
+         dnsPolicy: ClusterFirst
+         restartPolicy: Never
+      - containers:
+        - args: "${computer.jnlpmac} ${computer.name}"
+          envVars:
+          - containerEnvVar:
+              key: "JENKINS_URL"
+              value: "http://jenkins:8080"
+          image: "jenkins/jnlp-slave:3.27-1"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          resourceLimitCpu: "200m"
+          resourceLimitMemory: "256Mi"
+          resourceRequestCpu: "200m"
+          resourceRequestMemory: "256Mi"
+        label: "jenkins-jenkins-slave "
+        name: "default"
+        nodeUsageMode: NORMAL
+        workspaceVolume:
+          emptyDirWorkspaceVolume:
+            memory: false
+      - label: "kubectl"
+        name: "kubectl"
+        nodeUsageMode: NORMAL
+        workspaceVolume:
+          emptyDirWorkspaceVolume:
+            memory: false
+        yaml: "apiVersion: v1\nkind: Pod\nmetadata:\n  namespace: default\nspec:\n\
+          \  containers:\n  - name: jnlp\n    image: jenkinsci/jnlp-slave:3.27-1-alpine\n\
+          \  - name: kubectl\n    image: sivajey/kubectl\n    command: [ \"/bin/sh\"\
+          , \"-ec\", \"while :; do echo ''; sleep 1 ; done\"  ]"
+      - label: "kaniko"
+        name: "kaniko"
+        nodeUsageMode: NORMAL
+        workspaceVolume:
+          emptyDirWorkspaceVolume:
+            memory: false
+        yaml: "apiVersion: v1\nkind: Pod\nmetadata:\n  name: kaniko\nspec:\n  containers:\n\
+          \  - name: jnlp\n    image: jenkinsci/jnlp-slave:3.27-1-alpine\n  - name:\
+          \ kaniko\n    image: gcr.io/kaniko-project/executor:debug-v0.9.0\n    command:\n\
+          \    - /busybox/cat\n    tty: true\n    volumeMounts:\n      - name: docker-config\n\
+          \        mountPath: /kaniko/.docker/\n  volumes:\n    - name: docker-config\n\
+          \      configMap:\n        name: docker-config"
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: SYSTEM
+              id: user1
+              username: test
+              password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
+              id: user2
+              username: jenkins
+              password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
+              id: user3
+              username: max
+              password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
+              id: user4
+              username: bob
+              password: secretPassword              
+          - basicSSHUserPrivateKey:
+              scope: SYSTEM
+              id: agent-private-key-test
+              username: agentuser
+              passphrase: password
+              description: "ssh private key used to connect ssh slaves"
+              privateKeySource:
+                directEntry:
+                  privateKey: sp0ds9d+skkfjf
+unclassified:
+  globalLibraries:
+    libraries:
+      - name: "awesome-lib"
+        retriever:
+          modernSCM:
+            scm:
+              git:
+                remote: "https://github.com/jenkins-infra/pipeline-library.git"
