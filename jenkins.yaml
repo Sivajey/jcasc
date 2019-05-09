@@ -153,16 +153,7 @@ tool:
     installations:
     - home: "git"
       name: "Default"
-  gradle:
-    defaultProperties:
-    - installSource:
-        installers:
-        - "gradleInstaller"
-  jdk:
-    defaultProperties:
-    - installSource:
-        installers:
-        - jdkInstaller:
-            acceptLicense: false
+ 
+
 
 
