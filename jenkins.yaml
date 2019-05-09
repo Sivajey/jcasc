@@ -143,5 +143,26 @@ unclassified:
             scm:
               git:
                 remote: "https://github.com/jenkins-infra/pipeline-library.git"
+tool:
+  ant:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "antFromApache"
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  gradle:
+    defaultProperties:
+    - installSource:
+        installers:
+        - "gradleInstaller"
+  jdk:
+    defaultProperties:
+    - installSource:
+        installers:
+        - jdkInstaller:
+            acceptLicense: false
 
 
