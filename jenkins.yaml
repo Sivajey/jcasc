@@ -1,2 +1,2 @@
 jenkins:
-  systemMessage: "Test '{foo}'"
+  systemMessage: "Test '{key1}'"
