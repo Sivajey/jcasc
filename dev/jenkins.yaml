@@ -1,0 +1,28 @@
+jenkins:
+ clouds:
+  - kubernetes:
+      templates:
+      - name: "dev"
+        label: "dev"
+        yaml: |
+         apiVersion: v1
+         kind: Pod
+         metadata:
+           labels:
+             app: jnlp-0
+           name: jnlp
+         spec:
+           containers:
+           - name: jnlp
+             image: jenkinsci/jnlp-slave:3.27-1-alpine
+             imagePullPolicy: IfNotPresent
+             resources:
+               requests:
+                 memory: "256Mi"
+                 cpu: "0.3"
+               limits:
+                 memory: "512Mi"
+                 cpu: "0.5"
+         dnsPolicy: ClusterFirst
+         restartPolicy: Never
+
