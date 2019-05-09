@@ -9,12 +9,15 @@ jenkins:
           password: test
         - id: max
           password: test
+        - id: bob
+          password: test
   authorizationStrategy:
     globalMatrix:
       grantedPermissions:
         - "View/Read:jenkins"
         - "View/Read:max"
-        - "View/Create:jenkins"    
+        - "View/Create:jenkins" 
+        - "View/Create:bob"
         - "Overall/Administer:test"
   agentProtocols:
   - "JNLP4-connect"
@@ -94,6 +97,11 @@ credentials:
               id: user3
               username: max
               password: secretPassword
+          - usernamePassword:
+              scope: SYSTEM
+              id: user4
+              username: bob
+              password: secretPassword              
           - basicSSHUserPrivateKey:
               scope: SYSTEM
               id: agent-private-key-test
