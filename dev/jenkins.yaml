@@ -1,6 +1,7 @@
 jenkins:
  clouds:
   - kubernetes:
+      name: "kubernetes"
       templates:
       - name: "dev"
         label: "dev"
