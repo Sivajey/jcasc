@@ -23,7 +23,7 @@ jenkins:
   - "JNLP4-connect"
   - "Ping"
   clouds:
-      - kubernetes:
+  - kubernetes:
       containerCapStr: "10"
       jenkinsTunnel: "jenkins-agent:50000"
       jenkinsUrl: "http://jenkins:8080"
